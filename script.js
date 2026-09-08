@@ -86,11 +86,58 @@
   function contactLink(label, url) { return url ? `<a href="${url}" target="_blank" rel="noopener">${label}</a>` : `<span>${label}</span>`; }
   function stopAudio() { if(audio){audio.pause(); audio.currentTime=0; audio=null;} if(audioButton) audioButton.textContent='▷'; }
   async function playAudio(src, button) {
-    if(!src){ openModal('<h2>Audio</h2><p>'+t('noAudio')+'</p><p class="modal-note">'+t('audioHint')+'</p>'); return; }
-    const resolved=await resolveAsset(src);
-    if(audio && audio.src===resolved) { if(audio.paused){audio.play(); button.textContent='Ⅱ';} else {audio.pause(); button.textContent='▷';} return; }
-    stopAudio(); audio=new Audio(resolved); audioButton=button; audio.addEventListener('ended',()=>{button.textContent='▷';}); audio.play().then(()=>button.textContent='Ⅱ').catch(()=>openModal('<h2>Audio</h2><p>Could not play this audio file.</p>'));
+  if (!src) {
+    openModal(
+      '<h2>Audio</h2><p>' +
+      t('noAudio') +
+      '</p><p class="modal-note">' +
+      t('audioHint') +
+      '</p>'
+    );
+    return;
   }
+
+  const resolved = await resolveAsset(src);
+
+  // If this is the same audio, toggle play/pause
+  if (audio && audioButton === button) {
+    if (audio.paused) {
+      audio.play()
+        .then(() => button.textContent = 'Ⅱ')
+        .catch(() => {});
+    } else {
+      audio.pause();
+      button.textContent = '▷';
+    }
+    return;
+  }
+
+  // Stop any other audio before starting a new one
+  stopAudio();
+
+  audio = new Audio(resolved);
+  audioButton = button;
+
+  audio.addEventListener('ended', () => {
+    button.textContent = '▷';
+  });
+
+  audio.addEventListener('error', () => {
+    button.textContent = '▷';
+  });
+
+  audio.play()
+    .then(() => {
+      button.textContent = 'Ⅱ';
+    })
+    .catch(() => {
+      button.textContent = '▷';
+      openModal(
+        '<h2>Audio</h2>' +
+        '<p>Could not play this audio file.</p>'
+      );
+    });
+}
   function bind(){
     $('#langToggle').onclick=()=>{lang=lang==='en'?'pt':'en'; localStorage.setItem(langKey,lang); render();};
     $('.play-square').onclick=()=>playAudio(content.hero.showreel.audio, $('.play-square'));
