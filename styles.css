@@ -492,3 +492,6 @@ button { cursor: pointer; }
 .editor-actions button { border: 1px solid var(--gray-2); background: transparent; color: var(--red); padding: 11px 14px; }
 .editor-actions button:hover { border-color: var(--red); }
 @media (max-width: 600px) { .modal-card { padding: 26px 20px; } .editor-card { width: calc(100vw - 16px); } }
+
+/* Functional links */
+.phone-link { color: inherit; text-decoration: underline; text-underline-offset: 3px; }

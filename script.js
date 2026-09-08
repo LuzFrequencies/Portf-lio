@@ -70,13 +70,13 @@
     $('#about h2').innerHTML = `${t('about')} <em>—</em>`;
     const aboutPs = $$('#about .panel-content p');
     content.about.paragraphs.forEach((p,i)=>{ if (aboutPs[i]) aboutPs[i].textContent=p; });
-    $('.about-panel .text-link').textContent = `${t('downloadCv')}&nbsp; →`; $('.about-panel .text-link').href = content.about.cv || '#'; $('.about-panel .text-link').target = content.about.cv ? '_blank' : ''; 
+    const cvLink=$('.about-panel .text-link'); cvLink.textContent = `${t('downloadCv')}&nbsp; →`; cvLink.href = content.about.cv || '#'; cvLink.target = content.about.cv ? '_blank' : ''; cvLink.style.display = content.about.cv ? '' : 'none'; 
 
     $('#sound h2').innerHTML = `${t('sound')} <em>—</em>`;
     const list = $('.sound-list'); list.innerHTML = content.sound.services.map((s,i)=>`<div><span class="sound-icon">${['⌁','◌','◎','◉'][i%4]}</span><strong>${s}</strong></div>`).join('');
 
     $('#contact h2').innerHTML = `${t('contact')} <em>—</em>`;
-    $('.contact-list').innerHTML = `<p><span>✉</span><a href="mailto:${content.contact.email}">${content.contact.email}</a></p><p><span>◎</span>${contactLink(content.contact.instagram, content.contact.instagramUrl)}</p><p><span>☎</span>${content.contact.phone||''}</p><p><span>⌖</span>${content.contact.location}</p>`;
+    $('.contact-list').innerHTML = `<p><span>✉</span><a href="mailto:${content.contact.email}">${content.contact.email}</a></p>${content.contact.instagram ? `<p><span>◎</span>${contactLink(content.contact.instagram, content.contact.instagramUrl)}</p>` : ''}${content.contact.phone ? `<p><span>☎</span><a class="phone-link" href="tel:${String(content.contact.phone).replace(/[^+\d]/g,'')}">${content.contact.phone}</a></p>` : ''}<p><span>⌖</span>${content.contact.location}</p>`;
     $('.contact-cta').textContent = content.contact.cta;
     $('.contact-cta').href = `mailto:${content.contact.email}?subject=${encodeURIComponent('Portfolio enquiry — Lüz Frequencies')}`;
     $('.footer').innerHTML = `<span><strong>LÜZ</strong> FREQUENCIES © ${content.site.year}</span><span class="now-playing">NOW PLAYING&nbsp; — &nbsp;N0L4B3L&nbsp; — &nbsp; <span class="footer-wave">⌁⌁⌁⌁⌁</span>&nbsp; 01:02</span><button class="footer-edit" type="button" title="Edit content">+</button>`;
@@ -86,7 +86,7 @@
   function contactLink(label, url) { return url ? `<a href="${url}" target="_blank" rel="noopener">${label}</a>` : `<span>${label}</span>`; }
   function stopAudio() { if(audio){audio.pause(); audio.currentTime=0; audio=null;} if(audioButton) audioButton.textContent='▷'; }
   async function playAudio(src, button) {
-    if(!src){ openModal('<h2>Audio</h2><p>'+t('noAudio')+'</p><p class="modal-note">'+t('audioHint')+'</p>'); return; }
+    if(!src){ openModal('<h2>PLAY SIREN</h2><p>'+t('noAudio')+'</p><p class="modal-note">Open the <strong>+</strong> editor in the footer and upload the Siren audio file in HERO → Showreel audio. Then export the complete site.</p>'); return; }
     const resolved=await resolveAsset(src);
     if(audio && audio.src===resolved) { if(audio.paused){audio.play(); button.textContent='Ⅱ';} else {audio.pause(); button.textContent='▷';} return; }
     stopAudio(); audio=new Audio(resolved); audioButton=button; audio.addEventListener('ended',()=>{button.textContent='▷';}); audio.play().then(()=>button.textContent='Ⅱ').catch(()=>openModal('<h2>Audio</h2><p>Could not play this audio file.</p>'));
@@ -107,7 +107,7 @@
   }
   function openModal(html){
     let m=$('.modal'); if(!m){m=document.createElement('div');m.className='modal';document.body.appendChild(m);}
-    m.innerHTML=`<div class="modal-backdrop"></div><div class="modal-card"><button class="modal-close" type="button">×</button>${html}</div>`;m.classList.add('open');m.querySelector('.modal-close').onclick=()=>m.classList.remove('open');m.querySelector('.modal-backdrop').onclick=()=>m.classList.remove('open');
+    m.innerHTML=`<div class="modal-backdrop"></div><div class="modal-card"><button class="modal-close" type="button">×</button>${html}</div>`;m.classList.add('open');m.querySelector('.modal-close').onclick=()=>m.classList.remove('open');m.querySelector('.modal-backdrop').onclick=()=>m.classList.remove('open');m.addEventListener('keydown',e=>{if(e.key==='Escape')m.classList.remove('open')});
   }
   function openEditor(){
     const m=document.createElement('div');m.className='modal open editor-modal';
@@ -129,7 +129,7 @@
     content.projects.forEach((p,i)=>{const box=document.createElement('fieldset');box.innerHTML=`<legend>PROJECT ${p.number}</legend>`;[['Title',`projects.${i}.title`],['Thumbnail label',`projects.${i}.thumbLabel`],['Thumbnail image path / URL',`projects.${i}.thumbImage`],['Description',`projects.${i}.description`],['Year',`projects.${i}.year`],['Details',`projects.${i}.details`],['Audio path / URL',`projects.${i}.audio`],['Video path / URL',`projects.${i}.video`],['Project URL',`projects.${i}.link`]].forEach(([label,path])=>box.appendChild(makeField(label,path,/Description|Details/i.test(label))));projSec.appendChild(box)});f.appendChild(projSec);
     function activate(tab){m.querySelectorAll('.editor-tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));m.querySelectorAll('[data-section]').forEach(s=>s.style.display=s.dataset.section===tab?'grid':'none')}
     m.querySelectorAll('.editor-tabs button').forEach(b=>b.onclick=()=>activate(b.dataset.tab));activate('site');
-    m.querySelector('.modal-close').onclick=()=>m.remove();m.querySelector('.modal-backdrop').onclick=()=>m.remove();
+    m.querySelector('.modal-close').onclick=()=>m.remove();m.querySelector('.modal-backdrop').onclick=()=>m.remove();m.addEventListener('keydown',e=>{if(e.key==='Escape')m.remove()});m.tabIndex=-1;m.focus();
     m.querySelector('#savePreview').onclick=()=>{readEditor(m);localStorage.setItem(storageKey,JSON.stringify(content));m.remove();render();refreshAssetPreviews();};
     m.querySelector('#resetPreview').onclick=()=>{if(confirm('Reset all editable content to the original V5?')){localStorage.removeItem(storageKey);content=clone(base);m.remove();render();}};
     m.querySelector('#exportContent').onclick=()=>{readEditor(m);const text='window.LUZ_CONTENT = '+JSON.stringify(content,null,2)+';\n';const blob=new Blob([text],{type:'text/javascript'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='content.js';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};
