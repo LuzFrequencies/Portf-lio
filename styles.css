@@ -203,7 +203,7 @@ button { font: inherit; }
 .hero-tags {
   position: absolute;
   left: 12px;
-  bottom: 86px;
+  bottom: 65px;
   display: grid;
   gap: 7px;
   color: var(--blue);
