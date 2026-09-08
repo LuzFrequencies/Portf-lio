@@ -1,9 +1,41 @@
-# Lüz Frequencies — V5 Full Editor
+# Lüz — Audio & Music Portfolio
 
-This keeps the V5 visual design and adds a full content editor.
+Welcome to my online portfolio.
 
-Click the **+** in the footer to edit the site's content: navigation labels, hero copy, hero image path, tags, showreel, all four projects (text/image/audio/link), About, CV, Sound services, contact email/phone/Instagram, footer and English/Portuguese labels.
+I’m **Lüz**, a Music Producer and Sound Designer based in Lisbon, Portugal, with a background in **music production, sound engineering and audiovisual production**.
 
-Changes are saved in the browser for preview. Use **EXPORT CONTENT FILE** to export a new `content.js` when you want to publish those content changes to GitHub Pages.
+My work focuses on creating and shaping sound for different forms of media, combining technical knowledge with a strong interest in storytelling, atmosphere and experimentation.
 
-The SoundCloud contact field has been removed and replaced with a phone number.
+## What I do
+
+* 🎧 Sound Design
+* 🎵 Music Production & Composition
+* 🎬 Audio Post-Production
+* 🎙️ Foley & Sound Recording
+* 🎚️ Editing, Mixing & Mastering
+* 🎮 Audio for Games & Interactive Media
+* 📻 Radio & Broadcast Audio
+
+I work primarily with **Logic Pro X**, as well as **Ableton Live** and **Pro Tools**, and have experience with sound libraries, virtual instruments and professional audio plugins.
+
+## Selected Work
+
+This portfolio brings together a selection of projects exploring different approaches to sound — from cinematic sound design and Foley to music production and experimental audio.
+
+Each project represents a different aspect of my creative and technical practice, with a particular focus on how sound can create **emotion, identity, atmosphere and narrative**.
+
+## About My Approach
+
+I believe sound is more than something that accompanies an image.
+
+It can build tension, establish a sense of place, shape emotion and tell a story on its own.
+
+Whether working with music, dialogue, Foley or sound effects, I’m interested in finding the details that make an audiovisual experience feel more immersive and meaningful.
+
+## Currently
+
+I’m open to opportunities in **audio production, sound design, post-production, broadcasting, radio, television, games and other media-related projects**.
+
+If you’re interested in working together, feel free to get in touch.
+
+**Thank you for listening.**
