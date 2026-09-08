@@ -70,7 +70,7 @@
     $('#about h2').innerHTML = `${t('about')} <em>—</em>`;
     const aboutPs = $$('#about .panel-content p');
     content.about.paragraphs.forEach((p,i)=>{ if (aboutPs[i]) aboutPs[i].textContent=p; });
-    $('.about-panel .text-link').textContent = `${t('downloadCv')}; →`; $('.about-panel .text-link').href = content.about.cv || '#'; $('.about-panel .text-link').target = content.about.cv ? '_blank' : ''; 
+    $('.about-panel .text-link').textContent = `${t('downloadCv')} →`; $('.about-panel .text-link').href = content.about.cv || '#'; $('.about-panel .text-link').target = content.about.cv ? '_blank' : ''; 
 
     $('#sound h2').innerHTML = `${t('sound')} <em>—</em>`;
     const list = $('.sound-list'); list.innerHTML = content.sound.services.map((s,i)=>`<div><span class="sound-icon">${['⌁','◌','◎','◉'][i%4]}</span><strong>${s}</strong></div>`).join('');
