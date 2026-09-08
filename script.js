@@ -79,8 +79,7 @@
     $('.contact-list').innerHTML = `<p><span>✉</span><a href="mailto:${content.contact.email}">${content.contact.email}</a></p><p><span>◎</span>${contactLink(content.contact.instagram, content.contact.instagramUrl)}</p><p><span>☎</span>${content.contact.phone||''}</p><p><span>⌖</span>${content.contact.location}</p>`;
     $('.contact-cta').textContent = content.contact.cta;
     $('.contact-cta').href = `mailto:${content.contact.email}?subject=${encodeURIComponent('Portfolio enquiry — Lüz Frequencies')}`;
-    $('.footer').innerHTML = `<span><strong>LÜZ</strong> FREQUENCIES © ${content.site.year}</span><span class="now-playing">NOW PLAYING&nbsp; — &nbsp;N0L4B3L&nbsp; — &nbsp; <span class="footer-wave">⌁⌁⌁⌁⌁</span>&nbsp; 01:02</span><button class="footer-edit" type="button" title="Edit content">+</button>`;
-    bind();
+    $('.footer').innerHTML = `<span><strong>LÜZ</strong> FREQUENCIES © ${content.site.year}</span><span class="now-playing">NOW PLAYING&nbsp; — &nbsp;N0L4B3L&nbsp; — &nbsp; <span class="footer-wave">⌁⌁⌁⌁⌁</span>&nbsp; 01:02</span>`;
   }
 
   function contactLink(label, url) { return url ? `<a href="${url}" target="_blank" rel="noopener">${label}</a>` : `<span>${label}</span>`; }
