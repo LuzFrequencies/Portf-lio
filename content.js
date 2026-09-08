@@ -9,7 +9,7 @@ window.LUZ_CONTENT = {
   ],
   about:{title:'ABOUT',paragraphs:["I’m Lüz, a music producer, sound designer and audio engineer with a passion for creating immersive sonic experiences. I work across multiple disciplines, from music production and mixing to post-production for visual media.",'My work blends technical precision with artistic instinct to craft sound that connects and transforms.'],cv:''},
   sound:{title:'SOUND',services:['MUSIC PRODUCTION','SOUND DESIGN','FOLEY','MIXING & MASTERING']},
-  contact:{title:'CONTACT',email:'hello@luzfrequencies.com',phone:'',instagram:'@luz.frequencies',instagramUrl:'',location:'Based in Lisbon, Portugal',cta:'LET’S CREATE SOMETHING REAL.'},
+  contact:{title:'CONTACT',email:'luzfrequencies@gmail.com',phone:'+351 926 654 757',instagram:'@_heyimkassandra',instagramUrl:'https://www.instagram.com/_heyimkassandra/',location:'Based in Lisbon, Portugal',cta:'LET’S CREATE SOMETHING REAL.'},
   footer:{copyright:'LÜZ FREQUENCIES © 2026',nowPlaying:'NOW PLAYING — N0L4B3L —',duration:'01:02'},
   translations:{
     en:{work:'SELECTED WORK',sound:'SOUND',about:'ABOUT',contact:'CONTACT',playShowreel:'PLAY SIREN',pause:'PAUSE',playProject:'PLAY PROJECT',viewAll:'VIEW ALL PROJECTS',downloadCv:'DOWNLOAD CV',browseSounds:'BROWSE ALL SOUNDS',close:'CLOSE',noAudio:'Audio not added yet.',openProject:'OPEN PROJECT',editing:'EDIT EVERYTHING',editHint:'You can edit the site content, links, images and audio paths here. Save for a preview, or export content.js when you are ready to publish.',export:'EXPORT CONTENT FILE',reset:'RESET PREVIEW',save:'SAVE CHANGES'},
