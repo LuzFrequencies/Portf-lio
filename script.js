@@ -147,7 +147,6 @@
     $('.play-square').onclick=()=>playAudio(content.hero.showreel.audio, $('.play-square'));
     $$('.play-project').forEach(btn=>btn.onclick=()=>{ const p=content.projects[+btn.closest('.work-item').dataset.index]; openProject(p); });
     $('.about-panel .text-link').onclick=(e)=>{ if(!content.about.cv){e.preventDefault();openModal('<h2>'+t('downloadCv')+'</h2><p>'+t('noAudio')+'</p>');} };
-    $('.footer-edit').onclick=()=>openEditor();
   }
   async function openProject(p){
     if(p.video) p={...p,video:await resolveAsset(p.video)};
