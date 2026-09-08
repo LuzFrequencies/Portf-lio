@@ -85,13 +85,11 @@
 
   function contactLink(label, url) { return url ? `<a href="${url}" target="_blank" rel="noopener">${label}</a>` : `<span>${label}</span>`; }
   function stopAudio() { if(audio){audio.pause(); audio.currentTime=0; audio=null;} if(audioButton) audioButton.textContent='▷'; }
-  async function playAudio(src, button) {
+ async function playAudio(src, button) {
   if (!src) {
     openModal(
       '<h2>Audio</h2><p>' +
       t('noAudio') +
-      '</p><p class="modal-note">' +
-      t('audioHint') +
       '</p>'
     );
     return;
@@ -99,44 +97,51 @@
 
   const resolved = await resolveAsset(src);
 
-  // If this is the same audio, toggle play/pause
+  // Se já existe áudio associado a este botão,
+  // simplesmente alterna entre play e pause.
   if (audio && audioButton === button) {
     if (audio.paused) {
-      audio.play()
-        .then(() => button.textContent = 'Ⅱ')
-        .catch(() => {});
+      try {
+        await audio.play();
+        button.textContent = 'Ⅱ';
+      } catch (err) {
+        console.error('Erro ao retomar áudio:', err);
+      }
     } else {
       audio.pause();
       button.textContent = '▷';
     }
+
     return;
   }
 
-  // Stop any other audio before starting a new one
-  stopAudio();
+  // Para qualquer áudio anterior
+  if (audio) {
+    audio.pause();
+    audio.currentTime = 0;
+  }
 
-  audio = new Audio(resolved);
+  // Cria o novo áudio
+  audio = new Audio();
+  audio.src = resolved;
   audioButton = button;
 
   audio.addEventListener('ended', () => {
     button.textContent = '▷';
   });
 
-  audio.addEventListener('error', () => {
+  audio.addEventListener('error', (err) => {
+    console.error('Erro no áudio:', err);
     button.textContent = '▷';
   });
 
-  audio.play()
-    .then(() => {
-      button.textContent = 'Ⅱ';
-    })
-    .catch(() => {
-      button.textContent = '▷';
-      openModal(
-        '<h2>Audio</h2>' +
-        '<p>Could not play this audio file.</p>'
-      );
-    });
+  try {
+    await audio.play();
+    button.textContent = 'Ⅱ';
+  } catch (err) {
+    console.error('Não foi possível reproduzir o áudio:', err);
+    button.textContent = '▷';
+  }
 }
   function bind(){
     $('#langToggle').onclick=()=>{lang=lang==='en'?'pt':'en'; localStorage.setItem(langKey,lang); render();};
